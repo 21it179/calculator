@@ -104,3 +104,32 @@ if _name_ == "_main_":
             self.text = self.text[0:len(self.text)-1]
         self.textEdit.setText(self.text)
 
+# Finishing Touches
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionNew = QtWidgets.QAction(MainWindow)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("pyshine.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionNew.setIcon(icon)
+        self.actionNew.setObjectName("actionNew")
+        self.actionExit = QtWidgets.QAction(MainWindow)
+        self.actionExit.setObjectName("actionExit")
+        self.actionitem1 = QtWidgets.QAction(MainWindow)
+        self.actionitem1.setObjectName("actionitem1")
+        self.actionitem2 = QtWidgets.QAction(MainWindow)
+        self.actionitem2.setObjectName("actionitem2")
+        self.actionaa = QtWidgets.QAction(MainWindow)
+        self.actionaa.setObjectName("actionaa")
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+if _name_ == "_main_":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
