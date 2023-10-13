@@ -48,3 +48,59 @@ if _name_ == "_main_":
         self.pushButton.clicked.connect(self.show) 
         self.pushButton_3.clicked.connect(self.show)
         # ... (include code that connects button click events and defines functions)
+
+# Button Actions
+    def process(self):
+        try:
+            inp=self.text
+            inp = re.sub(r"\.(?![0-9])","", inp)
+            val = eval(inp, {'_builtins_':None})
+            self.text=str(val)
+        except Exception as e:
+            self.text = str(e)
+        self.processed = True
+
+    def show(self):
+        self.textEdit.setFontPointSize(24)
+        self.text = self.textEdit.toPlainText()
+        num_list = [str(num) for num in [0,1,2,3,4,5,6,7,8,9,'.']]
+        op_list = ['+','-','*','/','%']
+        c_or_ce_list = ['AC']
+        func_list=['1/x','x^2','sqrt','+/-','x^3']
+        if self.mw.sender().text()!='Backspace':
+            if self.mw.sender().text() in num_list :
+                if self.processed == True:
+                    self.text=''
+                self.text+=self.mw.sender().text()
+                self.processed = False
+            if self.mw.sender().text() in op_list :
+                self.text+=self.mw.sender().text()
+                self.processed = False
+            if self.mw.sender().text() =='=':
+                self.process()
+            if self.mw.sender().text() in c_or_ce_list:
+                self.text=''
+                self.processed = False
+            if self.mw.sender().text() in func_list:
+                if self.mw.sender().text() == func_list[0]:
+                    try:
+                        self.text= str(1/eval(self.text))
+                    except Exception as e: 
+                        self.text=str(e)
+                    self.processed = False
+                if self.mw.sender().text() == func_list[1]:
+                    self.text= str(eval(self.text)**2)
+                    self.processed = False
+                if self.mw.sender().text() == func_list[2]:
+                    self.text= str(eval(self.text)**0.5)
+                    self.processed = False
+                if self.mw.sender().text() == func_list[3]:
+                    self.text= str(-1*eval(self.text))	
+                    self.processed = False
+                if self.mw.sender().text() == func_list[4]:
+                    self.text= str(eval(self.text)**3)
+                    self.processed = False
+        else:
+            self.text = self.text[0:len(self.text)-1]
+        self.textEdit.setText(self.text)
+
