@@ -35,3 +35,16 @@ if _name_ == "_main_":
         # ... (include code for defining UI elements)
 
 # Omit the button click handling code for now.
+
+# Button Click Handling
+        self.mw  = MainWindow
+        self.text=''
+        self.textEdit.setFontPointSize(24)
+        self.processed=False
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.pushButton_12.clicked.connect(self.show) 
+        self.pushButton.clicked.connect(self.show) 
+        self.pushButton_3.clicked.connect(self.show)
+        # ... (include code that connects button click events and defines functions)
